@@ -23,8 +23,11 @@ def sequence_to_klist(sequence,kmer):
 def output(klist, outfilename, readsNo):
     outfile = open(outfilename, 'w')
     biglist = numpy.random.choice(klist,readsNo,True)
+    ID = 1
     for m in biglist:
+        outfile.write('>' + str(ID) + '\n')
         outfile.write(m + '\n')
+        ID = ID + 1
 
 def run():
     if len(sys.argv) < 5:
