@@ -4,24 +4,8 @@ import string
 import numpy
 
 
-def seqfromfile(fasta):
-
-    inputdatafile = open(fasta)
-    sequence = []
-    for line in inputdatafile:
-        if line[0]!='>':
-            sequence.append(line.strip())
-    sequence = ''.join(sequence)
-    return sequence
-
-def sequence_to_klist(sequence,kmer):
-    klist = []
-    for i in range(len(sequence)-kmer+1):
-        klist.append(sequence[i:i+kmer])
-    return klist
-
 def output(klist, outfilename, readsNo):
-    outfile = open(outfilename, 'w')
+    outfile = open(outfilename, 'a')
     biglist = numpy.random.choice(klist,readsNo,True)
     ID = 1
     for m in biglist:
@@ -37,7 +21,26 @@ def run():
     outfilename = sys.argv[2]
     kmer = int(sys.argv[3])
     readsNo = int(sys.argv[4])
-    output(sequence_to_klist(seqfromfile(fasta),kmer),outfilename,readsNo)
+    
+    inputdatafile = open(fasta)
+    ID=''
+    klist = []
+    outfile = open(outfilename, 'w')
+    outfile.close()
+    for line in inputdatafile:
+        if line[0]=='>':
+            if ID != '':
+                sequence = ''.join(sequence)
+                for i in range(len(sequence)-kmer+1):
+                    klist.append(sequence[i:i+kmer]) 
+            ID = line.strip().split('>')[1]
+            sequence=[]
+        else:
+            sequence.append(line.strip())   
+    sequence = ''.join(sequence)
+    for i in range(len(sequence)-kmer+1):
+        klist.append(sequence[i:i+kmer]) 
+    output(klist, outfilename, readsNo)
 
 run()
 
