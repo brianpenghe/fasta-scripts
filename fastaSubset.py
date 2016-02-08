@@ -5,7 +5,7 @@
 # Georgi Marinov                 #
 #                                # 
 ##################################
-
+# This script takes out fastasubset based on > ID list
 import sys
 import string
 
