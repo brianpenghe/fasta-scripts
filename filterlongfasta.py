@@ -1,3 +1,5 @@
+#This script filters out transcripts long than your cutoff
+
 import random
 import sys
 import string
