@@ -32,7 +32,7 @@ def run():
         i+=1
         if i % 10000000 == 0:
             print str(i/1000000) + 'M lines processed'
-        if i % 2 == 1 and line.startswith('>'):
+        if line.startswith('>'):
             line=line.replace(' ','_')
         outfile.write(line)
 
