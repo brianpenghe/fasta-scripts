@@ -3,6 +3,10 @@ import sys
 import string
 import numpy
 
+def rev_comp(seq):
+    comp = {'A':'T','C':'G','G':'C','T':'A','a':'t','c':'g','g':'c','t':'a','N':'N'}
+    RC = "".join(comp.get(base, base) for base in reversed(seq))
+    return RC
 
 def output(klist, outfilename, readsNo):
     outfile = open(outfilename, 'a')
@@ -10,7 +14,10 @@ def output(klist, outfilename, readsNo):
     ID = 1
     for m in biglist:
         outfile.write('>' + str(ID) + '\n')
-        outfile.write(m + '\n')
+        if ID % 2 == 0:
+            outfile.write(m + '\n')
+        else:
+            outfile.write(rev_comp(m) + '\n')
         ID = ID + 1
 
 def run():
