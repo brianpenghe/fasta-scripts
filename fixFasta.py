@@ -33,9 +33,9 @@ def run():
         if i % 10000000 == 0:
             print str(i/1000000) + 'M lines processed'
         if line.startswith('>'):
-            line=line.replace(' ','_')
+            #line=line.replace(' ','_')
+			line=line.strip().split[0]
         outfile.write(line)
-
     outfile.close()
 
 run()
