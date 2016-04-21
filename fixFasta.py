@@ -7,6 +7,7 @@
 ##################################
 
 import sys
+from sets import Set
 
 try:
 	import psyco
@@ -34,7 +35,7 @@ def run():
             print str(i/1000000) + 'M lines processed'
         if line.startswith('>'):
             #line=line.replace(' ','_')
-			line=line.strip().split[0]
+			line=line.split()[0] + '\n'
         outfile.write(line)
     outfile.close()
 
