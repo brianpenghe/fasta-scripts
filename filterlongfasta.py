@@ -6,13 +6,13 @@ import string
 import numpy
 
 
-def run():
-    if len(sys.argv) < 4:
-        print 'usage: python %s fasta outfilename 300' % sys.argv[0]
+def main(argv):
+    if len(argv) < 4:
+        print 'usage: python %s fasta outfilename 300' % argv[0]
         sys.exit(1)
-    fasta = sys.argv[1]
-    outfilename = sys.argv[2]
-    cutoff = int(sys.argv[3])
+    fasta = argv[1]
+    outfilename = argv[2]
+    cutoff = int(argv[3])
     
     inputdatafile = open(fasta)
     outfile = open(outfilename, 'w')
@@ -34,5 +34,6 @@ def run():
         outfile.write(sequence + '\n')
 
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 

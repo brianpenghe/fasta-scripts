@@ -9,15 +9,15 @@
 import sys
 import string
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 3:
-        print 'usage: python %s inputfilename <max piece size> <outfile prefix>' % sys.argv[0]
+    if len(argv) < 3:
+        print 'usage: python %s inputfilename <max piece size> <outfile prefix>' % argv[0]
         sys.exit(1)
 
-    inputfilename = sys.argv[1]
-    MaxSequence = int(sys.argv[2])
-    outputfileprefix = sys.argv[3]
+    inputfilename = argv[1]
+    MaxSequence = int(argv[2])
+    outputfileprefix = argv[3]
 
     lineslist = open(inputfilename)
 
@@ -57,5 +57,6 @@ def run():
             outfile.write(ID+'\n')
             outfile.write(sequenceDict[ID]+'\n')
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 

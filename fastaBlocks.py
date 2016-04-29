@@ -9,17 +9,17 @@
 import sys
 import string
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 3:
-        print 'usage: python %s fasta blockSize outputfilename [-replaceXwithN] [-replaceNames correspondence_file]' % sys.argv[0]
+    if len(argv) < 3:
+        print 'usage: python %s fasta blockSize outputfilename [-replaceXwithN] [-replaceNames correspondence_file]' % argv[0]
         print '\t format of correspondence_file for sequence name replacement: <old name> <tab> <new name>'
         print '\t note: if the sequence name replacement option is used, sequences for which no new name is specified will be skipped'
         sys.exit(1)
 
-    fasta = sys.argv[1]
-    blocksize = int(sys.argv[2])
-    outfilename = sys.argv[3]
+    fasta = argv[1]
+    blocksize = int(argv[2])
+    outfilename = argv[3]
 
     doXtoN = False
     if '-replaceXwithN':
@@ -29,7 +29,7 @@ def run():
     if '-replaceNames':
         doReplaceNames = True
         print 'will replace sequence names'
-        linelist = open(sys.argv[sys.argv.index('-replaceNames') + 1])
+        linelist = open(argv[argv.index('-replaceNames') + 1])
         ReplaceMentDict = {}
         for line in linelist:
             fields = line.strip().split('\t')
@@ -81,4 +81,5 @@ def run():
         for i in range(0,len(sequence),blocksize):
             outfile.write(sequence[i:min(i+blocksize, len(sequence))] + '\n')
    
-run()
+if __name__ == '__main__':
+    main(sys.argv)

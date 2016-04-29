@@ -9,14 +9,14 @@
 import sys
 import string
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 2:
-        print 'usage: python %s <contig fasta file> <output gtf file name> ' % sys.argv[0]
+    if len(argv) < 2:
+        print 'usage: python %s <contig fasta file> <output gtf file name> ' % argv[0]
         sys.exit(1)
     
-    inputfilename = sys.argv[1]
-    outfilename = sys.argv[2]
+    inputfilename = argv[1]
+    outfilename = argv[2]
 
     outfile = open(outfilename, 'w')
 
@@ -43,4 +43,5 @@ def run():
            seq=line.strip()
            sequence=sequence+seq
    
-run()
+if __name__ == '__main__':
+    main(sys.argv)
