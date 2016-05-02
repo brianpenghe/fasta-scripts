@@ -9,14 +9,14 @@
 import sys
 import string
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 2:
-        print 'usage: python %s fasta outpurfilename' % sys.argv[0]
+    if len(argv) < 2:
+        print 'usage: python %s fasta outpurfilename' % argv[0]
         sys.exit(1)
 
-    fasta = sys.argv[1]
-    outfilename = sys.argv[2]
+    fasta = argv[1]
+    outfilename = argv[2]
 
     GenomeDict={}
     sequence=''
@@ -48,4 +48,5 @@ def run():
 
     outfile.close()
    
-run()
+if __name__ == '__main__':
+    main(sys.argv)

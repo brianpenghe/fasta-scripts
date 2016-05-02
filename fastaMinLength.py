@@ -9,16 +9,16 @@
 import sys
 import string
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 4:
-        print 'usage: python %s fasta minLength blocksize outputfilename' % sys.argv[0]
+    if len(argv) < 4:
+        print 'usage: python %s fasta minLength blocksize outputfilename' % argv[0]
         sys.exit(1)
 
-    fasta = sys.argv[1]
-    minLenSequence = int(sys.argv[2])
-    blocksize = int(sys.argv[3])
-    outfilename = sys.argv[4]
+    fasta = argv[1]
+    minLenSequence = int(argv[2])
+    blocksize = int(argv[3])
+    outfilename = argv[4]
 
     outfile = open(outfilename, 'w')
     
@@ -48,4 +48,5 @@ def run():
         for i in range(0,len(sequence),blocksize):
             outfile.write(sequence[i:min(i+blocksize, len(sequence))] + '\n')
    
-run()
+if __name__ == '__main__':
+    main(sys.argv)

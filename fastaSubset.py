@@ -9,16 +9,16 @@
 import sys
 import string
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 4:
-        print 'usage: python %s wanted fieldID fasta outputfilename' % sys.argv[0]
+    if len(argv) < 4:
+        print 'usage: python %s wanted fieldID fasta outputfilename' % argv[0]
         sys.exit(1)
 
-    wanted = sys.argv[1]
-    fieldID = int(sys.argv[2])
-    fasta = sys.argv[3]
-    outfilename = sys.argv[4]
+    wanted = argv[1]
+    fieldID = int(argv[2])
+    fasta = argv[3]
+    outfilename = argv[4]
 
     WantedDict = {}
     linelist = open(wanted)
@@ -44,4 +44,5 @@ def run():
 
     outfile.close()
    
-run()
+if __name__ == '__main__':
+    main(sys.argv)

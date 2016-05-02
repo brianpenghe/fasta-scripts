@@ -20,14 +20,14 @@ def output(klist, outfilename, readsNo):
             outfile.write(rev_comp(m) + '\n')
         ID = ID + 1
 
-def run():
-    if len(sys.argv) < 5:
-        print 'usage: python %s fasta outfilename 30 100000' % sys.argv[0]
+def main(argv):
+    if len(argv) < 5:
+        print 'usage: python %s fasta outfilename 30 100000' % argv[0]
         sys.exit(1)
-    fasta = sys.argv[1]
-    outfilename = sys.argv[2]
-    kmer = int(sys.argv[3])
-    readsNo = int(sys.argv[4])
+    fasta = argv[1]
+    outfilename = argv[2]
+    kmer = int(argv[3])
+    readsNo = int(argv[4])
     
     inputdatafile = open(fasta)
     ID=''
@@ -49,5 +49,6 @@ def run():
         klist.append(sequence[i:i+kmer]) 
     output(klist, outfilename, readsNo)
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 

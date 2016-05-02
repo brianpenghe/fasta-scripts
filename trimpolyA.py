@@ -22,19 +22,19 @@ def getComplementarySequence(preliminarysequence):
         sequence=sequence+DNA[preliminarysequence[len(preliminarysequence)-i-1]]
     return sequence
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 4:
-        print 'usage: python %s inputfilename minpolyAlength minresiduallength outfilename [-Amismatches number] [-first number_reads]' % sys.argv[0]
+    if len(argv) < 4:
+        print 'usage: python %s inputfilename minpolyAlength minresiduallength outfilename [-Amismatches number] [-first number_reads]' % argv[0]
         sys.exit(1)
 
-    inputfilename = sys.argv[1]
-    minpolyA = int(sys.argv[2])
-    minresidualread = int(sys.argv[3])
-    outputfilename = sys.argv[4]
+    inputfilename = argv[1]
+    minpolyA = int(argv[2])
+    minresidualread = int(argv[3])
+    outputfilename = argv[4]
     Amismatches=0
-    if '-Amismatches' in sys.argv:
-        Amismatches=int(sys.argv[sys.argv.index('-Amismatches')+1])
+    if '-Amismatches' in argv:
+        Amismatches=int(argv[argv.index('-Amismatches')+1])
 
     polyT=''
     polyA=''
@@ -44,8 +44,8 @@ def run():
     listoflines = open(inputfilename)
     lineslist = listoflines.readlines()
     first=len(lineslist)
-    if '-first' in sys.argv:
-        first=2*int(sys.argv[sys.argv.index('-first')+1])
+    if '-first' in argv:
+        first=2*int(argv[argv.index('-first')+1])
 
     outfile = open(outputfilename, 'w')
     i=0
@@ -77,5 +77,6 @@ def run():
     print Atailedreads, 'reads with an A-tail found'
     outfile.close()
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 
