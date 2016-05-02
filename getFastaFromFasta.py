@@ -17,60 +17,60 @@ def getReverseComplement(preliminarysequence):
         sequence=sequence+DNA[preliminarysequence[len(preliminarysequence)-j-1]]
     return sequence
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 3:
-        print 'usage: python %s fasta inputfilename outpurfilename [-seqradius bp] [-usepeak fieldID|bed] [-chrfield fieldID] [-first number] [-name fieldID(s)] [-strand fieldID] [-narrowPeak]' % sys.argv[0]
+    if len(argv) < 3:
+        print 'usage: python %s fasta inputfilename outpurfilename [-seqradius bp] [-usepeak fieldID|bed] [-chrfield fieldID] [-first number] [-name fieldID(s)] [-strand fieldID] [-narrowPeak]' % argv[0]
         print '\tby default the forward strand is outputted' 
         print '\tdefault sequence names format is chr:start-stop format' 
         print '\tuse the -name option if you want to change the sequence output format - the content of the fields indicated will be used and the sequence name construct from those separated by "::"' 
         sys.exit(1)
 
     fieldID=1
-    if '-chrfield' in sys.argv:
-        fieldID = int(sys.argv[sys.argv.index('-chrfield') + 1])
+    if '-chrfield' in argv:
+        fieldID = int(argv[argv.index('-chrfield') + 1])
     
     doName = False
-    if '-name' in sys.argv:
+    if '-name' in argv:
         doName = True
-        fields = sys.argv[sys.argv.index('-name') + 1].split(',')
+        fields = argv[argv.index('-name') + 1].split(',')
         nameFields=[]
         for ID in fields:
             nameFields.append(int(ID))
 
     doStrand = False
-    if '-strand' in sys.argv:
+    if '-strand' in argv:
         doStrand = True
-        strandField = int(sys.argv[sys.argv.index('-strand') + 1])
+        strandField = int(argv[argv.index('-strand') + 1])
 
     doPeak = False
-    if '-usepeak' in sys.argv:
+    if '-usepeak' in argv:
         doPeak = True
         doBed = False
-        if sys.argv[sys.argv.index('-usepeak') + 1] == 'bed':
+        if argv[argv.index('-usepeak') + 1] == 'bed':
             doBed = True
         else:
-            peakFieldID = int(sys.argv[sys.argv.index('-usepeak') + 1])
-    if '-seqradius' in sys.argv:
-        radius = int(sys.argv[sys.argv.index('-seqradius') + 1])
+            peakFieldID = int(argv[argv.index('-usepeak') + 1])
+    if '-seqradius' in argv:
+        radius = int(argv[argv.index('-seqradius') + 1])
 
     doNarrowPeak=False
-    if '-narrowPeak' in sys.argv:
+    if '-narrowPeak' in argv:
         doNarrowPeak=True
         doPeak=True
 
-    fasta = sys.argv[1]
-    inputfilename = sys.argv[2]
-    outfilename = sys.argv[3]
+    fasta = argv[1]
+    inputfilename = argv[2]
+    outfilename = argv[3]
 
     outfile = open(outfilename, 'w')
     
     RegionDict={}
 
     doFirst=False   
-    if '-first' in sys.argv: 
+    if '-first' in argv: 
         doFirst=True
-        firstN = int(sys.argv[sys.argv.index('-first') + 1])
+        firstN = int(argv[argv.index('-first') + 1])
 
     i=0
     inputdatafile = open(inputfilename)
@@ -157,4 +157,5 @@ def run():
                 regionSequence = getReverseComplement(regionSequence)
             outfile.write(regionSequence + '\n')
    
-run()
+if __name__ == '__main__':
+    main(sys.argv)

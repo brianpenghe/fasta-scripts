@@ -14,28 +14,28 @@ try:
 except:
 	pass
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 2:
-        print 'usage: python %s inputfilename bpToKeep [-Nto A|C|T|G] [-renameIDs prefix]' % sys.argv[0]
+    if len(argv) < 2:
+        print 'usage: python %s inputfilename bpToKeep [-Nto A|C|T|G] [-renameIDs prefix]' % argv[0]
         print '\tUse - to specify standard input; the script will print to standard output by default'
         sys.exit(1)
 
-    inputfilename = sys.argv[1]
-    trim = int(sys.argv[2])
+    inputfilename = argv[1]
+    trim = int(argv[2])
     doNto=False
-    if '-Nto' in sys.argv:
+    if '-Nto' in argv:
         doNto=True
-        N=sys.argv[sys.argv.index('-Nto')+1]
+        N=argv[argv.index('-Nto')+1]
 
     doStdInput = False
     if inputfilename == '-':
         doStdInput = True
 
     doRenameIDs = False
-    if '-renameIDs' in sys.argv:
+    if '-renameIDs' in argv:
         doRenameIDs = True
-        RID = '>' + sys.argv[sys.argv.index('-renameIDs') + 1]
+        RID = '>' + argv[argv.index('-renameIDs') + 1]
 
     if doStdInput:
         listoflines = sys.stdin
@@ -56,5 +56,6 @@ def run():
             else:
                 print line[0:trim]
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 

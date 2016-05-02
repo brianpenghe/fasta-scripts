@@ -9,14 +9,14 @@
 import sys
 import string
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 2:
-        print 'usage: python %s inputfastafilename outfilename' % sys.argv[0]
+    if len(argv) < 2:
+        print 'usage: python %s inputfastafilename outfilename' % argv[0]
         sys.exit(1)
 
-    fastafilename = sys.argv[1]
-    outfilename = sys.argv[2]
+    fastafilename = argv[1]
+    outfilename = argv[2]
 
     outfile = open(outfilename, 'w')
 
@@ -47,5 +47,6 @@ def run():
 
     outfile.close()
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
 

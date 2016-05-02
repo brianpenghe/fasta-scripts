@@ -15,15 +15,15 @@ try:
 except:
 	pass
 
-def run():
+def main(argv):
 
-    if len(sys.argv) < 2:
-        print 'usage: python %s <list of files filename> outfilename ' % sys.argv[0]
+    if len(argv) < 2:
+        print 'usage: python %s <list of files filename> outfilename ' % argv[0]
         print 'input file format: filename <tab> label, i.e.: file.fa <tab> mm9'
         sys.exit(1)
 
-    inputfilename = sys.argv[1]
-    outputfilename = sys.argv[2]
+    inputfilename = argv[1]
+    outputfilename = argv[2]
 
     outfile = open(outputfilename, 'w')
 
@@ -42,4 +42,5 @@ def run():
 
     outfile.close()
 
-run()
+if __name__ == '__main__':
+    main(sys.argv)
