@@ -19,7 +19,7 @@ def main(argv):
 
     if len(argv) < 2:
         print 'usage: python %s inputfilename outfilename' % argv[0]
-        print '   this script will replace all intervals in fasta ID lines with an _ character so that IDs are not truncated by bowtie or other programs' 
+        print '   this script will throw away all the text after first space in fasta ID lines so that IDs are not truncated by bowtie or other programs' 
         sys.exit(1)
 
     inputfilename = argv[1]
