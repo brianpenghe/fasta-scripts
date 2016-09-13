@@ -1,9 +1,9 @@
 ##################################
 #                                #
-# Last checked 06/18/2016       # 
+# Last modified 09/12/2016       #
 #                                #
-# Peng He                       #
-#                                # 
+# Peng He                        #
+#                                #
 ##################################
 
 import sys
@@ -15,15 +15,15 @@ try:
 except:
 	pass
 
-def main(argv):
+def run():
 
-    if len(argv) < 2:
-        print 'usage: python %s inputfilename outfilename' % argv[0]
-        print '   this script will throw away all the text after first space in fasta ID lines so that IDs are not truncated by bowtie or other programs' 
+    if len(sys.argv) < 2:
+        print 'usage: python %s inputfilename outfilename [split]' % sys.argv[0]
+        print '   this script will by default replace all intervals in fasta ID lines with an _ character so that IDs are not truncated by bowtie or other programs, otherwise it just returns the first tab-delimited field'
         sys.exit(1)
 
-    inputfilename = argv[1]
-    outputfilename = argv[2]
+    inputfilename = sys.argv[1]
+    outputfilename = sys.argv[2]
 
     outfile = open(outputfilename, 'w')
 
@@ -34,11 +34,11 @@ def main(argv):
         if i % 10000000 == 0:
             print str(i/1000000) + 'M lines processed'
         if line.startswith('>'):
-            #line=line.replace(' ','_')
-			line=line.split()[0] + '\n'
+            if len(sys.argv) < 3:
+			    line=line.split()[0] + '\n'
+            else:
+			    line=line.replace(' ','_')
         outfile.write(line)
     outfile.close()
 
-if __name__ == '__main__':
-    main(sys.argv)
-
+run()
